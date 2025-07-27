@@ -9,9 +9,13 @@ import { Dashboard } from "./components/Dashboard";
 import { ProductManagement } from "./components/ProductManagement";
 import { Transactions } from "./components/Transactions";
 import { Settings } from "./components/Settings";
+import { PWAUpdateNotification } from "./components/PWAUpdateNotification";
+import { PWAInstallButton } from "./components/PWAInstallButton";
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState<'pos' | 'dashboard' | 'products' | 'transactions' | 'settings'>('pos');
+  const [activeTab, setActiveTab] = useState<
+    "pos" | "dashboard" | "products" | "transactions" | "settings"
+  >("pos");
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
@@ -19,53 +23,54 @@ export default function App() {
         <h2 className="text-xl font-semibold text-primary">POS System</h2>
         <div className="flex items-center gap-4">
           <Authenticated>
+            <PWAInstallButton />
             <nav className="flex gap-2">
               <button
-                onClick={() => setActiveTab('pos')}
+                onClick={() => setActiveTab("pos")}
                 className={`px-4 py-2 rounded-md font-medium transition-colors ${
-                  activeTab === 'pos'
-                    ? 'bg-blue-100 text-blue-700'
-                    : 'text-gray-600 hover:text-gray-900'
+                  activeTab === "pos"
+                    ? "bg-blue-100 text-blue-700"
+                    : "text-gray-600 hover:text-gray-900"
                 }`}
               >
                 Kasir
               </button>
               <button
-                onClick={() => setActiveTab('dashboard')}
+                onClick={() => setActiveTab("dashboard")}
                 className={`px-4 py-2 rounded-md font-medium transition-colors ${
-                  activeTab === 'dashboard'
-                    ? 'bg-blue-100 text-blue-700'
-                    : 'text-gray-600 hover:text-gray-900'
+                  activeTab === "dashboard"
+                    ? "bg-blue-100 text-blue-700"
+                    : "text-gray-600 hover:text-gray-900"
                 }`}
               >
                 Dashboard
               </button>
               <button
-                onClick={() => setActiveTab('products')}
+                onClick={() => setActiveTab("products")}
                 className={`px-4 py-2 rounded-md font-medium transition-colors ${
-                  activeTab === 'products'
-                    ? 'bg-blue-100 text-blue-700'
-                    : 'text-gray-600 hover:text-gray-900'
+                  activeTab === "products"
+                    ? "bg-blue-100 text-blue-700"
+                    : "text-gray-600 hover:text-gray-900"
                 }`}
               >
                 Produk
               </button>
               <button
-                onClick={() => setActiveTab('transactions')}
+                onClick={() => setActiveTab("transactions")}
                 className={`px-4 py-2 rounded-md font-medium transition-colors ${
-                  activeTab === 'transactions'
-                    ? 'bg-blue-100 text-blue-700'
-                    : 'text-gray-600 hover:text-gray-900'
+                  activeTab === "transactions"
+                    ? "bg-blue-100 text-blue-700"
+                    : "text-gray-600 hover:text-gray-900"
                 }`}
               >
                 Transaksi
               </button>
               <button
-                onClick={() => setActiveTab('settings')}
+                onClick={() => setActiveTab("settings")}
                 className={`px-4 py-2 rounded-md font-medium transition-colors ${
-                  activeTab === 'settings'
-                    ? 'bg-blue-100 text-blue-700'
-                    : 'text-gray-600 hover:text-gray-900'
+                  activeTab === "settings"
+                    ? "bg-blue-100 text-blue-700"
+                    : "text-gray-600 hover:text-gray-900"
                 }`}
               >
                 Pengaturan
@@ -79,11 +84,16 @@ export default function App() {
         <Content activeTab={activeTab} />
       </main>
       <Toaster />
+      <PWAUpdateNotification />
     </div>
   );
 }
 
-function Content({ activeTab }: { activeTab: 'pos' | 'dashboard' | 'products' | 'transactions' | 'settings' }) {
+function Content({
+  activeTab,
+}: {
+  activeTab: "pos" | "dashboard" | "products" | "transactions" | "settings";
+}) {
   const loggedInUser = useQuery(api.auth.loggedInUser);
 
   if (loggedInUser === undefined) {
@@ -97,18 +107,22 @@ function Content({ activeTab }: { activeTab: 'pos' | 'dashboard' | 'products' | 
   return (
     <div className="max-w-7xl mx-auto">
       <Authenticated>
-        {activeTab === 'pos' && <POSInterface />}
-        {activeTab === 'dashboard' && <Dashboard />}
-        {activeTab === 'products' && <ProductManagement />}
-        {activeTab === 'transactions' && <Transactions />}
-        {activeTab === 'settings' && <Settings />}
+        {activeTab === "pos" && <POSInterface />}
+        {activeTab === "dashboard" && <Dashboard />}
+        {activeTab === "products" && <ProductManagement />}
+        {activeTab === "transactions" && <Transactions />}
+        {activeTab === "settings" && <Settings />}
       </Authenticated>
-      
+
       <Unauthenticated>
         <div className="max-w-md mx-auto mt-16">
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">Sistem POS</h1>
-            <p className="text-gray-600">Silakan masuk untuk menggunakan sistem kasir</p>
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">
+              Sistem POS
+            </h1>
+            <p className="text-gray-600">
+              Silakan masuk untuk menggunakan sistem kasir
+            </p>
           </div>
           <SignInForm />
         </div>
