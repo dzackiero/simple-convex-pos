@@ -3,8 +3,6 @@
 This is a project built with [Chef](https://chef.convex.dev) using [Convex](https://convex.dev) as its backend.
  You can find docs about Chef with useful information like how to deploy to production [here](https://docs.convex.dev/chef).
   
-This project is connected to the Convex deployment named [`cheerful-ocelot-948`](https://dashboard.convex.dev/d/cheerful-ocelot-948).
-  
 ## Project structure
   
 The frontend code is in the `app` directory and is built with [Vite](https://vitejs.dev/).
@@ -12,10 +10,6 @@ The frontend code is in the `app` directory and is built with [Vite](https://vit
 The backend code is in the `convex` directory.
   
 `npm run dev` will start the frontend and backend servers.
-
-## App authentication
-
-Chef apps use [Convex Auth](https://auth.convex.dev/) with Anonymous auth for easy sign in. You may wish to change this before deploying your app.
 
 ## Developing and deploying your app
 
